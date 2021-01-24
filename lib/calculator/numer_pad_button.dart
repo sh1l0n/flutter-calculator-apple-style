@@ -7,7 +7,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:flutter_calc/calculator/text_utils.dart';
+import 'package:flutter_calc/calculator/widget_style_config.dart';
 
 class NumberPadButtonWidget extends StatefulWidget {
   const NumberPadButtonWidget({
