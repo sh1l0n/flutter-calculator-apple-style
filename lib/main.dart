@@ -33,15 +33,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final TextStyleConfig textStyle = TextStyleConfig(
       size: 18,
-      color: Color(0x000000),
+      color: Color(0xffffffff),
       family: "Arial-MT",
       weight: FontWeight.normal,
       package: "",
     );
     final ContainerStyleConfig buttonStyle = ContainerStyleConfig(
-      normalColor: null, 
-      highlightColor: null, 
-      disableColor: null, 
+      normalColor: Color(0xffff00ff), 
+      highlightColor: Color(0x0000ffff),
+      disableColor: Color(0x00ff00ff),
       size: Size(50, 50)
     );
     

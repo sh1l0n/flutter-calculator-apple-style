@@ -3,6 +3,8 @@
 // Copyright © 2019 iRobot Corporation All rights reserved.
 //
 
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -29,11 +31,20 @@ class NumberPadButtonWidget extends StatefulWidget {
   State<StatefulWidget> createState() => _NumerPadButtonState();
 }
 
+// enum NumerPadButtonAction {
+//   NORMAL,
+//   PRESSED,
+//   DISABLED
+// }
+
 class _NumerPadButtonState extends State<NumberPadButtonWidget> {
+
+  // final StreamController<NumerPadButtonAction> _colo
 
   void handleTouch() {
     if (widget.isEnabled) {
-      widget.onTap.add(widget.text);
+      print("handleTouch " + widget.text);
+      // widget.onTap.add(widget.text);
     }
   }
 
@@ -43,9 +54,6 @@ class _NumerPadButtonState extends State<NumberPadButtonWidget> {
     final Color color = widget.isEnabled ? widget.widgetStyleConfig.normalColor : widget.widgetStyleConfig.disableColor;
 
     return GestureDetector(
-      onTapDown: (TapDownDetails details) {
-        handleTouch();
-      },
       onTapUp: (TapUpDetails details) {
         handleTouch();
       },

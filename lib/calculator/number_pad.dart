@@ -5,6 +5,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_calc/calculator/numer_pad_button.dart';
 import 'package:flutter_calc/calculator/widget_style_config.dart';
 
 class NumberPadWidget extends StatefulWidget {
@@ -25,7 +26,7 @@ class NumberPadWidget extends StatefulWidget {
 
 class _NumberPadWState extends State<NumberPadWidget> {
 
-  static final List<int> padSize = [5, 3];
+  static final List<int> padSize = [4, 5];
   static final List<List<String>> defaultOrderButtons = [
     ["+/-", "%", "/", "<"],
     ["7", "8", "9", "x"],
@@ -37,11 +38,63 @@ class _NumberPadWState extends State<NumberPadWidget> {
   @override
   Widget build(BuildContext context) {
 
+    // List<Widget> padRows = [];
+    // for (final List<String> rowInfoButtons in defaultOrderButtons) {
+    //   List<Widget> buttons = [];
+    //   for (final String buttonTitle in rowInfoButtons) {
+    //     final button = NumberPadButtonWidget(
+    //       text: buttonTitle,
+    //       isEnabled: true,
+    //       textStyleConfig: widget.textStyle,
+    //       widgetStyleConfig: widget.buttonStyle,
+    //       onTap: null,
+    //     );
+    //     buttons.add(button);
+    //   }
+    //   final row = Row(
+    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //     children: buttons,
+    //   );
+    //   padRows.add(row);
+    // }
 
-    return Container(
-      width: widget.buttonStyle.size.width * padSize[0],
-      height: widget.buttonStyle.size.height * padSize[1],
-      color: Colors.amber,
+    // return Container(
+    //   width: widget.buttonStyle.size.width * padSize[0],
+    //   height: widget.buttonStyle.size.height * padSize[1],
+    //   color: Colors.amber,
+    //   child:  Column(
+    //     mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+    //     children: padRows,
+    //   ),
+    // );
+
+    List<Widget> buttons = [];
+    for (final List<String> row in defaultOrderButtons) {
+      for (final String column in row) {
+        final button = NumberPadButtonWidget(
+          text: column,
+          isEnabled: true,
+          textStyleConfig: widget.textStyle,
+          widgetStyleConfig: widget.buttonStyle,
+          onTap: null,
+        );
+        buttons.add(button);
+      }
+    }
+
+    return Material(
+      type: MaterialType.transparency,
+      child: Container(
+        // margin: EdgeInsets.only(top: 230),
+        margin: EdgeInsets.all(50),
+        width: widget.buttonStyle.size.width * padSize[0],
+        height: widget.buttonStyle.size.height * padSize[1],
+        color: Colors.red,
+        child: GridView.count(
+          crossAxisCount: 4, // 4 columns
+          children: buttons,
+        ),
+      ),
     );
   }
 }
