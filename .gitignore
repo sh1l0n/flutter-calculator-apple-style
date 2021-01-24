@@ -2,3 +2,4 @@
 .packages
 *.lock
 *DS_Store
+build/
