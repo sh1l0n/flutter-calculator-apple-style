@@ -21,8 +21,8 @@ class TextStyleConfig {
   final String package;
 }
 
-class WidgetStyleConfig {
-  const WidgetStyleConfig({
+class ContainerStyleConfig {
+  const ContainerStyleConfig({
     @required this.normalColor, 
     @required this.highlightColor, 
     @required this.disableColor,

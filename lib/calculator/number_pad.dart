@@ -5,16 +5,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_calc/calculator/widget_style_config.dart';
 
 class NumberPadWidget extends StatefulWidget {
    const NumberPadWidget({
     Key key, 
-    @required this.size,
+    @required this.buttonStyle,
+    @required this.textStyle,
     @required this.onKeyPressed}) 
   : super(key: key);
 
   final Sink<RawKeyEvent> onKeyPressed;
-  final Size size;
+  final ContainerStyleConfig buttonStyle;
+  final TextStyleConfig textStyle;
 
   @override
   State<StatefulWidget> createState() => _NumberPadWState();
@@ -33,9 +36,11 @@ class _NumberPadWState extends State<NumberPadWidget> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Container(
-      width: widget.size.width,
-      height: widget.size.height,
+      width: widget.buttonStyle.size.width * padSize[0],
+      height: widget.buttonStyle.size.height * padSize[1],
       color: Colors.amber,
     );
   }

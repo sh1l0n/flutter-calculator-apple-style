@@ -21,7 +21,7 @@ class NumberPadButtonWidget extends StatefulWidget {
 
   final String text;
   final bool isEnabled;
-  final WidgetStyleConfig widgetStyleConfig;
+  final ContainerStyleConfig widgetStyleConfig;
   final TextStyleConfig textStyleConfig;
   final Sink<String> onTap;
   
@@ -39,6 +39,9 @@ class _NumerPadButtonState extends State<NumberPadButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
+
+    final Color color = widget.isEnabled ? widget.widgetStyleConfig.normalColor : widget.widgetStyleConfig.disableColor;
+
     return GestureDetector(
       onTapDown: (TapDownDetails details) {
         handleTouch();
@@ -53,6 +56,7 @@ class _NumerPadButtonState extends State<NumberPadButtonWidget> {
       child: Container(
         width: widget.widgetStyleConfig.size.width,
         height: widget.widgetStyleConfig.size.height,
+        color: color,
         child: Stack(
           children: [
             Container(
