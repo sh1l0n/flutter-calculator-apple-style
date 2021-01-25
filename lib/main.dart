@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
       color: Colors.black12,
       cornerRadius: 0,
       horizontalMargin: 8,
-      size: Size(200, 40),
+      height: 40,
       strokeColor: Colors.black45,
       strokeWidth: 1,
       textStyle: TextStyleConfig(

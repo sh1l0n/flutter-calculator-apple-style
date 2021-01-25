@@ -10,7 +10,7 @@ import 'number_pad/number_pad_button_painter.dart';
 
 class DisplayWidgetStyle {
   const DisplayWidgetStyle({
-    @required this.size,
+    @required this.height,
     @required this.color, 
     @required this.horizontalMargin,
     @required this.textStyle,
@@ -19,7 +19,7 @@ class DisplayWidgetStyle {
     @required this.strokeColor, 
   });
 
-  final Size size;
+  final double height;
   final Color color;
   final TextStyleConfig textStyle;
   final double horizontalMargin;
@@ -31,23 +31,25 @@ class DisplayWidgetStyle {
 class DisplayWidget extends StatelessWidget {
   const DisplayWidget({
     Key key, 
+    @required this.width,
     @required this.text,
     @required this.style, 
   }) 
   : super(key: key);
 
   final String text;
+  final double width;
   final DisplayWidgetStyle style;
 
   Widget build(BuildContext context) {
     return Container(
-      width: style.size.width,
-      height: style.size.height,
+      width: width,
+      height: style.height,
       color: style.color,
       child: Stack(
         children: [
           CustomPaint(
-            size: style.size,
+            size: Size(width, style.height),
             painter: NumberPadButtonPainter(
               style: PainterStyleConfig(
                 cornerRadius: style.cornerRadius,
@@ -59,8 +61,8 @@ class DisplayWidget extends StatelessWidget {
           ),
           Center(
             child: Container(
-              width: style.size.width,
-              height: style.size.height,
+              width: width,
+              height: style.height,
               child: Center(
                 child: Text(
                   text,

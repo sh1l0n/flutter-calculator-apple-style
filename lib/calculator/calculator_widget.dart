@@ -66,8 +66,8 @@ class _CalculatorState extends State<CalculatorWidget> {
   @override
   Widget build(BuildContext context) {
     final size = Size(
-      max(widget.style.display.size.width, widget.style.button.base.size.width),
-      widget.style.display.size.height + widget.style.button.base.size.height*5,
+      widget.style.button.base.size.width * padSize[0],
+      widget.style.display.height + widget.style.button.base.size.height*padSize[1],
     );
     
     return Container(
@@ -82,6 +82,7 @@ class _CalculatorState extends State<CalculatorWidget> {
             stream: _stream,
             builder: (BuildContext c, AsyncSnapshot<String> snapshot) {
               return DisplayWidget(
+                width: size.width,
                 text: snapshot.data,
                 style: widget.style.display,
               );
