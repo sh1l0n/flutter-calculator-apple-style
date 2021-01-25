@@ -97,16 +97,18 @@ class _NumerPadButtonState extends State<NumberPadButtonWidget> {
               child: Container(
                 width: widget.style.size.width,
                 height: widget.style.size.height,
-                child: Text(
-                  widget.text,
-                  maxLines: 1,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: widget.textStyle.size,
-                    fontWeight: widget.textStyle.weight,
-                    color: widget.textStyle.color,
-                    fontFamily: widget.textStyle.family,
-                    package: widget.textStyle.package,
+                child: Center(
+                  child: Text(
+                    widget.text,
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: widget.textStyle.size,
+                      fontWeight: widget.textStyle.weight,
+                      color: widget.textStyle.color,
+                      fontFamily: widget.textStyle.family,
+                      package: widget.textStyle.package,
+                    ),
                   ),
                 ),
               ),
