@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_calc/calculator/calculator_widget.dart';
 import 'package:flutter_calc/calculator/display/display_widget.dart';
 import 'package:flutter_calc/calculator/number_pad/number_pad.dart';
 
@@ -33,19 +34,19 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    final textStyle = TextStyleConfig(
-      size: 18,
-      color: Color(0xffffffff),
-      family: "Arial-MT",
-      weight: FontWeight.normal,
-      package: "",
-    );
     final buttonStyle = NumerPadButtonStyle(
-      style: ContainerStyleConfig(
+      base: ContainerStyleConfig(
         normalColor: Color(0xffff00ff), 
         highlightColor: Color(0x0000ffff),
         disableColor: Color(0x00ff00ff),
         size: Size(50, 50),
+      ),
+      text: TextStyleConfig(
+        size: 18,
+        color: Color(0xffffffff),
+        family: "Arial-MT",
+        weight: FontWeight.normal,
+        package: "",
       ),
       cornerRadius: 10, 
       strokeWidth: 3, 
@@ -73,17 +74,14 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: DisplayWidget(
-          style: displayStyle,
-        )
-      )
-      // body: Center(
-      //   child: NumberPadWidget(
-      //     buttonStyle: buttonStyle,
-      //     textStyle: textStyle,
-      //     onKeyPressed: null,
-      //   ),
-      // )
+        child: CalculatorWidget(
+          style: CalculatorWidgetStyle(
+            backgroundColor: Colors.red,
+            display: displayStyle,
+            button: buttonStyle,
+          ),
+        ),
+      ),
     );
   }
 }
