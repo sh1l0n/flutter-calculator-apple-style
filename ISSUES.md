@@ -1,10 +1,8 @@
 ## Issues
 
 ### DOING
-[] Running on Android
 
 ### TODO
-[] Do calculator fit screen in mobile devices
 [] Highlight buttons when pressed (add animation because setState is not enought)
 [] Align display text at right
 [] Do calculator draggable in the web
@@ -21,3 +19,5 @@
 [x] Disable/Enable symbols in order to give feedback to the user
 [x] Stylish as Swift-Calculator
 [x] Running on web
+[X] Running on Android
+[X] Do calculator fit screen in mobile devices
