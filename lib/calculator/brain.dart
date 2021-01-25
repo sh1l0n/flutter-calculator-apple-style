@@ -1,4 +1,6 @@
 
+import 'package:flutter/material.dart';
+
 enum _BrainTypes {
   clear,
   sign,
@@ -64,8 +66,25 @@ class Brain {
   String _history = "";
   // String get history => _history; 
 
-  String __computeOperationStack() {
-    
+
+
+  static String _computeOperationStack(List<String> operationStack) {
+    if 
+  }
+
+  static String _removeLast(String number) {
+    String newValue = number;
+    if (number.length>0) {
+      newValue = newValue.substring(0, newValue.length - 1);
+      if (newValue.length == 0) {
+        newValue = "0";
+      } else if (newValue[newValue.length-1] == ".") {
+        newValue = newValue.substring(0, newValue.length - 1);
+      }
+    } else {
+      newValue = "0";
+    }
+    return newValue;
   }
 
 
@@ -98,16 +117,30 @@ class Brain {
         break;
       case _BrainTypes.equals:
         _operationStack.add(value);
-        _value = __computeOperationStack();
+        _value = _computeOperationStack(_operationStack);
         _operationStack = [];
         _history += "=;" + value + "\n";
         break;
       case _BrainTypes.remove:
+        if (value.contains("e")) {
+          final vSplitted = value.split("e");
+          final newValue = _removeLast(vSplitted[0]);
+          _value  += (value == "0" ? "0" : newValue + "e" + vSplitted[1]);
+        } else {
+          _value = _removeLast(value);
+        }
         break;
       case _BrainTypes.dot:
+        _value += (value.contains(symbol) || value.contains("e"))  ? "" : symbol;
         break;
       case _BrainTypes.number:
-        _value += symbol;
+        if (value.contains("e")) {
+          final vSplitted = value.split("e");
+          _value = vSplitted[0] + (vSplitted[0].length==1 ? "." : "") + symbol + "e" + vSplitted[1];
+
+        } else {
+          _value = value=="0" ? symbol : (value + symbol);
+        }
         break;
     }
     
