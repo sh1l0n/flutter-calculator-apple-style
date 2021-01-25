@@ -72,7 +72,6 @@ class _NumerPadButtonState extends State<NumberPadButtonWidget> {
       child: Container(
         width: widget.style.base.size.width,
         height: widget.style.base.size.height,
-        color: color,
         child: Stack(
           children: [
             CustomPaint(

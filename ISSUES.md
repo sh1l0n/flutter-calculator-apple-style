@@ -1,7 +1,6 @@
 ## Issues
 
 ## DOING
-[] Add calculator skeleton
 [] Connect number pad with display
 
 ### TODO
@@ -13,3 +12,4 @@
 [X] Number pad view needs to detect gestures
 [X] Center button text
 [X] Add display
+[x] Add calculator skeleton

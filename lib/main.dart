@@ -36,9 +36,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final buttonStyle = NumerPadButtonStyle(
       base: ContainerStyleConfig(
-        normalColor: Color(0xffff00ff), 
-        highlightColor: Color(0x0000ffff),
-        disableColor: Color(0x00ff00ff),
+        normalColor: Colors.black38, 
+        highlightColor: Colors.lightBlueAccent,
+        disableColor: Colors.blueGrey,
         size: Size(50, 50),
       ),
       text: TextStyleConfig(
@@ -48,18 +48,18 @@ class _MyHomePageState extends State<MyHomePage> {
         weight: FontWeight.normal,
         package: "",
       ),
-      cornerRadius: 10, 
-      strokeWidth: 3, 
-      strokeColor: Color(0xffffffff)
+      cornerRadius: 0, 
+      strokeWidth: 1, 
+      strokeColor: Colors.black45,
     );
 
     final displayStyle = DisplayWidgetStyle(
-      color: Color(0x00ff12ff),
-      cornerRadius: 10,
+      color: Colors.black12,
+      cornerRadius: 0,
       horizontalMargin: 8,
       size: Size(200, 40),
-      strokeColor: Color(0x2255aaff),
-      strokeWidth: 3,
+      strokeColor: Colors.black45,
+      strokeWidth: 1,
       textStyle: TextStyleConfig(
         size: 20,
         color: Colors.black,
@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: CalculatorWidget(
           style: CalculatorWidgetStyle(
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.grey,
             display: displayStyle,
             button: buttonStyle,
           ),

@@ -67,9 +67,9 @@ class _DisplayWidgetState extends State<DisplayWidget> {
               height: widget.style.size.height,
               child: Center(
                 child: Text(
-                  "0123mkdaldmlasm askldnm",
+                  "012asd",
                   maxLines: 1,
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.right,
                   style: TextStyle(
                     fontSize: widget.style.textStyle.size,
                     fontWeight: widget.style.textStyle.weight,

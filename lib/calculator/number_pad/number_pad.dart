@@ -82,11 +82,8 @@ class _NumberPadWState extends State<NumberPadWidget> {
     return Material(
       type: MaterialType.transparency,
       child: Container(
-        // margin: EdgeInsets.only(top: 230),
-        margin: EdgeInsets.all(50),
         width: widget.buttonStyle.base.size.width * padSize[0],
         height: widget.buttonStyle.base.size.height * padSize[1],
-        color: Colors.red,
         child: GridView.count(
           crossAxisCount: 4, // 4 columns
           children: buttons,
