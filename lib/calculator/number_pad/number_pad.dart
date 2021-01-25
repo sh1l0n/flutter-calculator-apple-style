@@ -8,8 +8,8 @@ import 'package:flutter/widgets.dart';
 
 import 'numer_pad_button.dart';
 
-class NumberPadWidget extends StatefulWidget {
-   const NumberPadWidget({
+class NumberPad extends StatefulWidget {
+   const NumberPad({
     Key key, 
     @required this.padSize,
     @required this.defaultOrderButtons,
@@ -23,17 +23,17 @@ class NumberPadWidget extends StatefulWidget {
   final NumerPadButtonStyle buttonStyle;
 
   @override
-  State<StatefulWidget> createState() => _NumberPadWState();
+  State<StatefulWidget> createState() => _NumberPadState();
 }
 
-class _NumberPadWState extends State<NumberPadWidget> {
+class _NumberPadState extends State<NumberPad> {
 
   @override
   Widget build(BuildContext context) {
     List<Widget> buttons = [];
     for (final List<String> row in widget.defaultOrderButtons) {
       for (final String column in row) {
-        final button = NumberPadButtonWidget(
+        final button = NumberPadButton(
           text: column,
           isEnabled: true,
           style: widget.buttonStyle,

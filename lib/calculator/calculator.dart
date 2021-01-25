@@ -75,9 +75,12 @@ class _CalculatorState extends State<Calculator> {
             initialData: "0",
             stream: _stream,
             builder: (BuildContext c, AsyncSnapshot<String> snapshot) {
+              final number = widget.brain.compute(snapshot.data, 32);
+              print("snapshot.data " + snapshot.data);
+              print("number " + number);
               return Display(
                 width: size.width,
-                text: snapshot.data,
+                text: number,
                 style: widget.style.display,
               );
           }),

@@ -1,11 +1,11 @@
 ## Issues
 
 ## DOING
-[] Highlight buttons when pressed
+[] Add calculator operations: +,-,*,/,%,C,.
+[] Highlight buttons when pressed (add animation because setState is not enought)
 
 ### TODO
 [] Do calculator draggable in the view
-[] Add calculator operations: +,-,*,/,%,C,.
 
 ### DONE
 [x] Add basic number pad view

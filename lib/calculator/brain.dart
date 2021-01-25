@@ -25,7 +25,7 @@ class Brain {
     ["C", "0", ".", "="],
   ];
 
-  final symbolKeys = {
+  final _symbolKeys = {
     "C": _BrainTypes.clear,
     "+/-": _BrainTypes.sign,
     "%": _BrainTypes.perc,
@@ -48,16 +48,69 @@ class Brain {
     "<": _BrainTypes.remove
   };
 
-  String _current = "";
-  String get current => _current;
+  String _value = "";
+  String get value => _value;
+  double get valueDouble {
+    try {
+      return double.parse(value);
+    } catch (e) {
+      return 0;
+    }
+  }
 
   List<String> _operationStack = [];
-  List<String> get operationStack => _operationStack;
+  // List<String> get operationStack => _operationStack;
 
   String _history = "";
-  String get history => _history; 
+  // String get history => _history; 
+
+  String __computeOperationStack() {
+    
+  }
+
 
   String compute(String symbol, int maxLength) {
-    return current;
+    
+    if (!_symbolKeys.containsKey(symbol)) {
+      return value;
+    }
+    final symbolKey = _symbolKeys[symbol];
+    switch (symbolKey) {
+      case _BrainTypes.clear:
+        _value = "0";
+        _operationStack = [];
+        _history += "\n";
+        break;
+      case _BrainTypes.sign:
+        _value = (valueDouble * -1).toString();
+        break;
+      case _BrainTypes.perc:
+        _value = (valueDouble / 100).toString();
+        break;
+      case _BrainTypes.div:
+      case _BrainTypes.sum: 
+      case _BrainTypes.sub:
+      case _BrainTypes.mul:
+        _operationStack.add(value);
+        _operationStack.add(symbol);
+        _history += _value + ";" + symbol + ";";
+        _value = "0";
+        break;
+      case _BrainTypes.equals:
+        _operationStack.add(value);
+        _value = __computeOperationStack();
+        _operationStack = [];
+        _history += "=;" + value + "\n";
+        break;
+      case _BrainTypes.remove:
+        break;
+      case _BrainTypes.dot:
+        break;
+      case _BrainTypes.number:
+        _value += symbol;
+        break;
+    }
+    
+    return value;
   }
 }

@@ -30,8 +30,8 @@ class NumerPadButtonStyle {
   final Color strokeColor;
 }
 
-class NumberPadButtonWidget extends StatefulWidget {
-  const NumberPadButtonWidget({
+class NumberPadButton extends StatefulWidget {
+  const NumberPadButton({
     Key key, 
     @required this.text, 
     @required this.isEnabled,
@@ -49,12 +49,11 @@ class NumberPadButtonWidget extends StatefulWidget {
 }
 
 
-class _NumerPadButtonState extends State<NumberPadButtonWidget> {
+class _NumerPadButtonState extends State<NumberPadButton> {
 
   StreamController<_NumberPadButtonWidgetState> _buttonController;
   Stream<_NumberPadButtonWidgetState> get _stream => _buttonController.stream;
   Sink<_NumberPadButtonWidgetState> get _sink => _buttonController.sink;
-
 
   @override
   void initState() {
