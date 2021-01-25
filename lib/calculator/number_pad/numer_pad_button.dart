@@ -48,7 +48,13 @@ class NumberPadButtonWidget extends StatefulWidget {
 
 
 class _NumerPadButtonState extends State<NumberPadButtonWidget> {
-  bool _isTapDown = false;
+  bool _isTapDown;
+
+  @override
+  void initState() {
+    super.initState();
+    _isTapDown = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,27 +64,13 @@ class _NumerPadButtonState extends State<NumberPadButtonWidget> {
 
     return GestureDetector(
       onTapDown: (TapDownDetails details) {
-        if (widget.isEnabled) {
-          setState(() {
-            _isTapDown = true;
-          });
-        }
+        _handleTap();
       },
       onTapUp: (TapUpDetails details) {
-        if (widget.isEnabled) {
-          setState(() {
-            _isTapDown = false;
-          });
-          // widget.onTap.add(widget.text);
-        }
+        _handleTap();
       },
       onTapCancel: () {
-        if (widget.isEnabled) {
-          setState(() {
-            _isTapDown = false;
-          });
-        }
-        // widget.onTap.add(widget.text);
+        _handleTap();
       },
       dragStartBehavior: DragStartBehavior.down,
       child: Container(
@@ -121,5 +113,16 @@ class _NumerPadButtonState extends State<NumberPadButtonWidget> {
         ),
       ),
     );
+  }
+
+  void _handleTap() {
+    if (widget.isEnabled) {
+      setState(() {
+        _isTapDown = false;
+      });
+      if (!_isTapDown && widget.onTap!=null) {
+        widget.onTap.add(widget.text);
+      }
+    }
   }
 }

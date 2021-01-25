@@ -15,7 +15,7 @@ class NumberPadWidget extends StatefulWidget {
     @required this.onKeyPressed}) 
   : super(key: key);
 
-  final Sink<RawKeyEvent> onKeyPressed;
+  final Sink<String> onKeyPressed;
   final NumerPadButtonStyle buttonStyle;
 
   @override
@@ -35,37 +35,6 @@ class _NumberPadWState extends State<NumberPadWidget> {
 
   @override
   Widget build(BuildContext context) {
-
-    // List<Widget> padRows = [];
-    // for (final List<String> rowInfoButtons in defaultOrderButtons) {
-    //   List<Widget> buttons = [];
-    //   for (final String buttonTitle in rowInfoButtons) {
-    //     final button = NumberPadButtonWidget(
-    //       text: buttonTitle,
-    //       isEnabled: true,
-    //       textStyleConfig: widget.textStyle,
-    //       widgetStyleConfig: widget.buttonStyle,
-    //       onTap: null,
-    //     );
-    //     buttons.add(button);
-    //   }
-    //   final row = Row(
-    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //     children: buttons,
-    //   );
-    //   padRows.add(row);
-    // }
-
-    // return Container(
-    //   width: widget.buttonStyle.size.width * padSize[0],
-    //   height: widget.buttonStyle.size.height * padSize[1],
-    //   color: Colors.amber,
-    //   child:  Column(
-    //     mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-    //     children: padRows,
-    //   ),
-    // );
-
     List<Widget> buttons = [];
     for (final List<String> row in defaultOrderButtons) {
       for (final String column in row) {
@@ -73,7 +42,7 @@ class _NumberPadWState extends State<NumberPadWidget> {
           text: column,
           isEnabled: true,
           style: widget.buttonStyle,
-          onTap: null,
+          onTap: widget.onKeyPressed,
         );
         buttons.add(button);
       }

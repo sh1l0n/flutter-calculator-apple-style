@@ -5,8 +5,8 @@
 
 import 'package:flutter/material.dart';
 
-import '../../common/widget_style_config.dart';
-import '../number_pad/number_pad_button_painter.dart';
+import '../common/widget_style_config.dart';
+import 'number_pad/number_pad_button_painter.dart';
 
 class DisplayWidgetStyle {
   const DisplayWidgetStyle({
@@ -28,54 +28,50 @@ class DisplayWidgetStyle {
   final Color strokeColor;
 }
 
-class DisplayWidget extends StatefulWidget {
+class DisplayWidget extends StatelessWidget {
   const DisplayWidget({
     Key key, 
+    @required this.text,
     @required this.style, 
   }) 
   : super(key: key);
 
+  final String text;
   final DisplayWidgetStyle style;
 
-  @override
-  State<StatefulWidget> createState() => _DisplayWidgetState();
-}
-
-class _DisplayWidgetState extends State<DisplayWidget> {
-  @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.style.size.width,
-      height: widget.style.size.height,
-      color: widget.style.color,
+      width: style.size.width,
+      height: style.size.height,
+      color: style.color,
       child: Stack(
         children: [
           CustomPaint(
-            size: widget.style.size,
+            size: style.size,
             painter: NumberPadButtonPainter(
               style: PainterStyleConfig(
-                cornerRadius: widget.style.cornerRadius,
-                fillColor: widget.style.color,
-                strokeColor: widget.style.strokeColor,
-                strokeWidth: widget.style.strokeWidth,
+                cornerRadius: style.cornerRadius,
+                fillColor: style.color,
+                strokeColor: style.strokeColor,
+                strokeWidth: style.strokeWidth,
               ),
             ),
           ),
           Center(
             child: Container(
-              width: widget.style.size.width,
-              height: widget.style.size.height,
+              width: style.size.width,
+              height: style.size.height,
               child: Center(
                 child: Text(
-                  "012asd",
+                  text,
                   maxLines: 1,
                   textAlign: TextAlign.right,
                   style: TextStyle(
-                    fontSize: widget.style.textStyle.size,
-                    fontWeight: widget.style.textStyle.weight,
-                    color: widget.style.textStyle.color,
-                    fontFamily: widget.style.textStyle.family,
-                    package: widget.style.textStyle.package,
+                    fontSize: style.textStyle.size,
+                    fontWeight: style.textStyle.weight,
+                    color: style.textStyle.color,
+                    fontFamily: style.textStyle.family,
+                    package: style.textStyle.package,
                   ),
                 ),
               ),

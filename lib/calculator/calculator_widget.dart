@@ -3,11 +3,12 @@
 // Copyright © 2019 iRobot Corporation All rights reserved.
 //
 
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
 
-import 'display/display_widget.dart';
+import 'display_widget.dart';
 import 'number_pad/number_pad.dart';
 import 'number_pad/numer_pad_button.dart';
 
@@ -37,9 +38,24 @@ class CalculatorWidget extends StatefulWidget {
 
 class _CalculatorState extends State<CalculatorWidget> {
 
+  StreamController<String> _calculatorController;
+  Stream<String> get _stream => _calculatorController.stream;
+  Sink<String> get _sink => _calculatorController.sink;
+
+  @override
+  void initState() {
+    super.initState();
+    _calculatorController = StreamController<String>.broadcast();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _calculatorController.close();
+  }
+
   @override
   Widget build(BuildContext context) {
-
     final size = Size(
       max(widget.style.display.size.width, widget.style.button.base.size.width),
       widget.style.display.size.height + widget.style.button.base.size.height*5,
@@ -52,12 +68,18 @@ class _CalculatorState extends State<CalculatorWidget> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          DisplayWidget(
-            style: widget.style.display,
-          ),
+          StreamBuilder(
+            initialData: "0",
+            stream: _stream,
+            builder: (BuildContext c, AsyncSnapshot<String> snapshot) {
+              return DisplayWidget(
+              text: snapshot.data,
+              style: widget.style.display,
+            );
+          }),
           NumberPadWidget(
             buttonStyle: widget.style.button,
-            onKeyPressed: null,
+            onKeyPressed: _sink,
           ),
         ],
       ),

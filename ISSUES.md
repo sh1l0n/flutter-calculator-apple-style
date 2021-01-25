@@ -1,7 +1,7 @@
 ## Issues
 
 ## DOING
-[] Connect number pad with display
+[] Highlight buttons when pressed
 
 ### TODO
 [] Do calculator draggable in the view
@@ -13,3 +13,4 @@
 [X] Center button text
 [X] Add display
 [x] Add calculator skeleton
+[x] Connect number pad with display
