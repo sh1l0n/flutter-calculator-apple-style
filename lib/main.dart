@@ -3,7 +3,9 @@
 // Copyright Author 2021 All rights reserved.
 //
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'calculator/brain.dart';
 import 'calculator/calculator.dart';
@@ -19,6 +21,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setEnabledSystemUIOverlays([]);
+    
     return MaterialApp(
       title: 'Flutter Calculator',
       home: MyHomePage(title: 'Flutter Calculator'),
@@ -104,14 +109,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return buttonStyles;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final buttonSize = Size(50, 50);
+  CalculatorStyle generateCalculatorStyle(Size buttonSize, double displayHeight) {
     final displayStyle = DisplayStyle(
       color: Color(0xff4c4c4c),
       cornerRadius: 0,
       horizontalMargin: 4,
-      height: 40,
+      height: displayHeight,
       strokeColor: Color(0xff131313),
       strokeWidth: 1,
       textStyle: TextStyleConfig(
@@ -123,23 +126,43 @@ class _MyHomePageState extends State<MyHomePage> {
       )
     );
     final buttonStyles = _generateButtonStyles(buttonSize);
+    return CalculatorStyle(
+      backgroundColor: Colors.grey,
+      display: displayStyle,
+      buttons: buttonStyles,
+      buttonSize: buttonSize,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    final size = MediaQuery.of(context).size;
+    final brain = Brain();
+
+    Size buttonSize = Size.zero;
+    double displaySize = 0;
+    int maxCharacters = 0;
+    if (!kIsWeb) {
+      final width = (size.width~/brain.padSize[0]).toDouble();
+      final height = (size.height~/(brain.padSize[1]*1.8)).toDouble();
+      buttonSize = Size(width, height);  
+      displaySize = height*0.8;
+      maxCharacters = 22;
+    } else {
+      buttonSize = Size(50, 50);  
+      displaySize = buttonSize.height*0.8;
+      maxCharacters = 14;
+    }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Center(
-        child: Calculator(
-          brain: Brain(),
-          maxCharacters: 14,
-          style: CalculatorStyle(
-            backgroundColor: Colors.grey,
-            display: displayStyle,
-            buttons: buttonStyles,
-            buttonSize: buttonSize,
+          child: Calculator(
+            brain: brain,
+            maxCharacters: maxCharacters,
+            style: generateCalculatorStyle(buttonSize, displaySize)
           ),
-        ),
-      ),
+      )
     );
   }
 }

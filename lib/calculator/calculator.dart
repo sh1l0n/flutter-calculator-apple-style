@@ -86,7 +86,7 @@ class _CalculatorState extends State<Calculator> {
       height: size.height,
       color: widget.style.backgroundColor,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           StreamBuilder(
             initialData: "C",
@@ -94,7 +94,7 @@ class _CalculatorState extends State<Calculator> {
             builder: (BuildContext c, AsyncSnapshot<String> snapshot) {
               final values = widget.brain.compute(snapshot.data, widget.maxCharacters);
               final number = values[0];
-              final disabledSymbols = values [1];;
+              final disabledSymbols = values [1];
               if (_sinkDisabledSymbols != null) {
                 _sinkDisabledSymbols.add(disabledSymbols);
               }
