@@ -3,43 +3,58 @@
 // Copyright © 2019 iRobot Corporation All rights reserved.
 //
 
-import 'dart:async';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:flutter_calc/calculator/widget_style_config.dart';
+import 'package:flutter_calc/common/widget_style_config.dart';
+
+import 'number_pad_button_painter.dart';
+
+class NumerPadButtonStyle extends ContainerStyleConfig {
+  NumerPadButtonStyle({
+    @required Color normalColor, 
+    @required Color highlightColor, 
+    @required Color disableColor,
+    @required Size size,
+    this.cornerRadius, 
+    this.strokeWidth, 
+    this.strokeColor
+  }): super(
+    normalColor: normalColor,
+    highlightColor: highlightColor,
+    disableColor: disableColor,
+    size: size
+  );
+
+  final double cornerRadius; 
+  final double strokeWidth;
+  final Color strokeColor;
+}
 
 class NumberPadButtonWidget extends StatefulWidget {
   const NumberPadButtonWidget({
     Key key, 
     @required this.text, 
     @required this.isEnabled,
-    @required this.widgetStyleConfig,
-    @required this.textStyleConfig,
+    @required this.style,
+    @required this.textStyle,
     @required this.onTap
   }) : super(key: key);
 
   final String text;
   final bool isEnabled;
-  final ContainerStyleConfig widgetStyleConfig;
-  final TextStyleConfig textStyleConfig;
+  final NumerPadButtonStyle style;
+  final TextStyleConfig textStyle;
   final Sink<String> onTap;
   
   @override
   State<StatefulWidget> createState() => _NumerPadButtonState();
 }
 
-// enum NumerPadButtonAction {
-//   NORMAL,
-//   PRESSED,
-//   DISABLED
-// }
 
 class _NumerPadButtonState extends State<NumberPadButtonWidget> {
-
-  // final StreamController<NumerPadButtonAction> _colo
 
   void handleTouch() {
     if (widget.isEnabled) {
@@ -51,7 +66,7 @@ class _NumerPadButtonState extends State<NumberPadButtonWidget> {
   @override
   Widget build(BuildContext context) {
 
-    final Color color = widget.isEnabled ? widget.widgetStyleConfig.normalColor : widget.widgetStyleConfig.disableColor;
+    final Color color = widget.isEnabled ? widget.style.normalColor : widget.style.disableColor;
 
     return GestureDetector(
       onTapUp: (TapUpDetails details) {
@@ -62,24 +77,37 @@ class _NumerPadButtonState extends State<NumberPadButtonWidget> {
       },
       dragStartBehavior: DragStartBehavior.down,
       child: Container(
-        width: widget.widgetStyleConfig.size.width,
-        height: widget.widgetStyleConfig.size.height,
+        width: widget.style.size.width,
+        height: widget.style.size.height,
         color: color,
         child: Stack(
           children: [
-            Container(
-              width: widget.widgetStyleConfig.size.width,
-              height: widget.widgetStyleConfig.size.height,
-              child: Text(
-                widget.text,
-                maxLines: 1,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: widget.textStyleConfig.size,
-                  fontWeight: widget.textStyleConfig.weight,
-                  color: widget.textStyleConfig.color,
-                  fontFamily: widget.textStyleConfig.family,
-                  package: widget.textStyleConfig.package,
+            CustomPaint(
+              size: widget.style.size,
+              painter: NumberPadButtonPainter(
+                style: PainterStyleConfig(
+                  cornerRadius: widget.style.cornerRadius,
+                  fillColor: color,
+                  strokeColor: widget.style.strokeColor,
+                  strokeWidth: widget.style.strokeWidth,
+                ),
+              ),
+            ),
+            Center(
+              child: Container(
+                width: widget.style.size.width,
+                height: widget.style.size.height,
+                child: Text(
+                  widget.text,
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: widget.textStyle.size,
+                    fontWeight: widget.textStyle.weight,
+                    color: widget.textStyle.color,
+                    fontFamily: widget.textStyle.family,
+                    package: widget.textStyle.package,
+                  ),
                 ),
               ),
             ),

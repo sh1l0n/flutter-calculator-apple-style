@@ -6,7 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_calc/calculator/numer_pad_button.dart';
-import 'package:flutter_calc/calculator/widget_style_config.dart';
+import 'package:flutter_calc/common/widget_style_config.dart';
 
 class NumberPadWidget extends StatefulWidget {
    const NumberPadWidget({
@@ -74,8 +74,8 @@ class _NumberPadWState extends State<NumberPadWidget> {
         final button = NumberPadButtonWidget(
           text: column,
           isEnabled: true,
-          textStyleConfig: widget.textStyle,
-          widgetStyleConfig: widget.buttonStyle,
+          textStyle: widget.textStyle,
+          style: widget.buttonStyle,
           onTap: null,
         );
         buttons.add(button);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calc/calculator/number_pad.dart';
 
-import 'calculator/widget_style_config.dart';
+import 'common/widget_style_config.dart';
 
 void main() {
   runApp(MyApp());

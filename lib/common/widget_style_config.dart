@@ -34,3 +34,17 @@ class ContainerStyleConfig {
   final Color disableColor;
   final Size size;
 }
+
+class PainterStyleConfig {
+  const PainterStyleConfig({
+    @required this.cornerRadius, 
+    @required this.strokeWidth, 
+    @required this.strokeColor, 
+    @required this.fillColor
+  });
+
+  final double cornerRadius;
+  final double strokeWidth;
+  final Color strokeColor;
+  final Color fillColor;
+}
