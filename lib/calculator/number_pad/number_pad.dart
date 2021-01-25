@@ -14,12 +14,14 @@ class NumberPad extends StatefulWidget {
     @required this.padSize,
     @required this.defaultOrderButtons,
     @required this.buttonStyle,
-    @required this.onKeyPressed}) 
+    @required this.onKeyPressed,
+    @required this.disabledSymbolsStream}) 
   : super(key: key);
 
   final List<int> padSize;
   final List<List<String>> defaultOrderButtons;
   final Sink<String> onKeyPressed;
+  final Stream<List<String>> disabledSymbolsStream;
   final NumerPadButtonStyle buttonStyle;
 
   @override
@@ -35,9 +37,9 @@ class _NumberPadState extends State<NumberPad> {
       for (final String column in row) {
         final button = NumberPadButton(
           text: column,
-          isEnabled: true,
           style: widget.buttonStyle,
           onTap: widget.onKeyPressed,
+          disabledSymbolsStream: widget.disabledSymbolsStream,
         );
         buttons.add(button);
       }

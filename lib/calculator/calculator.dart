@@ -45,16 +45,22 @@ class _CalculatorState extends State<Calculator> {
   Stream<String> get _stream => _calculatorController.stream;
   Sink<String> get _sink => _calculatorController.sink;
 
+  StreamController<List<String>> _disabledSymbolsController;
+  Stream<List<String>> get _streamDisabledSymbols => _disabledSymbolsController.stream;
+  Sink<List<String>> get _sinkDisabledSymbols => _disabledSymbolsController.sink;
+
   @override
   void initState() {
     super.initState();
     _calculatorController = StreamController<String>.broadcast();
+    _disabledSymbolsController = StreamController<List<String>>.broadcast();
   }
 
   @override
   void dispose() {
     super.dispose();
     _calculatorController.close();
+    _disabledSymbolsController.close();
   }
 
   @override
@@ -78,10 +84,9 @@ class _CalculatorState extends State<Calculator> {
               final values = widget.brain.compute(snapshot.data, 32);
               final number = values[0];
               final disabledSymbols = values [1];
-
-              print("snapshot.data " + snapshot.data);
-              print("number " + number);
-              print("disabledSymbols ${disabledSymbols.toString()}");
+              if (_sinkDisabledSymbols != null) {
+                _sinkDisabledSymbols.add(disabledSymbols);
+              }
               return Display(
                 width: size.width,
                 text: number,
@@ -93,6 +98,7 @@ class _CalculatorState extends State<Calculator> {
             defaultOrderButtons: widget.brain.defaultOrderButtons,
             buttonStyle: widget.style.button,
             onKeyPressed: _sink,
+            disabledSymbolsStream: _streamDisabledSymbols,
           ),
         ],
       ),

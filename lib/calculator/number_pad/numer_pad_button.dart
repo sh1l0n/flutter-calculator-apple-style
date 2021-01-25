@@ -34,20 +34,19 @@ class NumberPadButton extends StatefulWidget {
   const NumberPadButton({
     Key key, 
     @required this.text, 
-    @required this.isEnabled,
     @required this.style,
-    @required this.onTap
+    @required this.onTap,
+    @required this.disabledSymbolsStream,
   }) : super(key: key);
 
   final String text;
-  final bool isEnabled;
   final NumerPadButtonStyle style;
   final Sink<String> onTap;
+  final Stream<List<String>> disabledSymbolsStream;
   
   @override
   State<StatefulWidget> createState() => _NumerPadButtonState();
 }
-
 
 class _NumerPadButtonState extends State<NumberPadButton> {
 
@@ -55,10 +54,17 @@ class _NumerPadButtonState extends State<NumberPadButton> {
   Stream<_NumberPadButtonWidgetState> get _stream => _buttonController.stream;
   Sink<_NumberPadButtonWidgetState> get _sink => _buttonController.sink;
 
+  bool _isEnabled;
   @override
   void initState() {
     super.initState();
     _buttonController = StreamController<_NumberPadButtonWidgetState>.broadcast();
+
+    _isEnabled = true;
+    widget.disabledSymbolsStream.listen((List<String> disabledSymbols) {
+        _isEnabled = ! disabledSymbols.contains(widget.text);
+        _sink.add(_isEnabled ? _NumberPadButtonWidgetState.NORMAL : _NumberPadButtonWidgetState.DISABLED);
+    });
   }
 
   @override
@@ -99,7 +105,7 @@ class _NumerPadButtonState extends State<NumberPadButton> {
   }
 
   void _handleTap(final bool isTapDown) {
-    if (widget.isEnabled) {
+    if (_isEnabled) {
       if (_sink != null) {
         _sink.add(isTapDown ? _NumberPadButtonWidgetState.HIGHLIGHTED : _NumberPadButtonWidgetState.NORMAL);
       }
