@@ -14,12 +14,14 @@ import 'number_pad/numer_pad_button.dart';
 class CalculatorStyle {
   const CalculatorStyle({
     @required this.backgroundColor,
-    @required this.display, 
-    @required this.button,
+    @required this.display,
+    @required this.buttonSize, 
+    @required this.buttons,
   });
 
   final DisplayStyle display;
-  final NumerPadButtonStyle button;
+  final Size buttonSize;
+  final Map<String, NumerPadButtonStyle> buttons;
   final Color backgroundColor;
 }
 
@@ -75,8 +77,8 @@ class _CalculatorState extends State<Calculator> {
   @override
   Widget build(BuildContext context) {
     final size = Size(
-      widget.style.button.base.size.width * widget.brain.padSize[0],
-      widget.style.display.height + widget.style.button.base.size.height*widget.brain.padSize[1],
+      widget.style.buttonSize.width * widget.brain.padSize[0],
+      widget.style.display.height + widget.style.buttonSize.height*widget.brain.padSize[1],
     );
     
     return Container(
@@ -105,7 +107,7 @@ class _CalculatorState extends State<Calculator> {
           NumberPad(
             padSize: widget.brain.padSize,
             defaultOrderButtons: widget.brain.defaultOrderButtons,
-            buttonStyle: widget.style.button,
+            buttonStyles: widget.style.buttons,
             onKeyPressed: _sinkNumberPad,
             disabledSymbolsStream: _streamDisabledSymbols,
           ),
