@@ -1,11 +1,10 @@
 ## Issues
 
 ## DOING
-[] Add display
+[] Add calculator skeleton
 [] Connect number pad with display
 
 ### TODO
-[] Add calculator skeleton
 [] Do calculator draggable in the view
 [] Add calculator operations: +,-,*,/,%,C,.
 
@@ -13,3 +12,4 @@
 [X] Add basic number pad view
 [X] Number pad view needs to detect gestures
 [X] Center button text
+[X] Add display
