@@ -2,9 +2,6 @@
 
 
 ## DOING
-[X] Add basic number pad view
-[X] Number pad view needs to detect gestures
-[X] Center button text
 
 ### TODO
 [] Add calculator skeleton
@@ -14,3 +11,6 @@
 [] Add calculator operations: +,-,*,/,%,C,.
 
 ### DONE
+[X] Add basic number pad view
+[X] Number pad view needs to detect gestures
+[X] Center button text
