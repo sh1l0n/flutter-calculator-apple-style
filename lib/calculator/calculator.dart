@@ -1,11 +1,9 @@
 //
 // Created by sh1l0n
-// Copyright © 2019 iRobot Corporation All rights reserved.
+// Copyright Author 2021 All rights reserved.
 //
 
 import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 
 import 'brain.dart';
