@@ -80,7 +80,7 @@ class Brain {
       symbols += ["."];
     } 
     if (number.length>=maxCharacters-1) {
-      symbols += ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "+/-"]
+      symbols += ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "+/-"];
     }
     return symbols;
   }
@@ -144,10 +144,10 @@ class Brain {
   }
 
 
-  String compute(final String symbol, final int maxCharacters) {
+  List compute(final String symbol, final int maxCharacters) {
     
     if (!_symbolKeys.containsKey(symbol)) {
-      return value;
+      return [value, getDisabledSymbols(value, _operationStack, _symbolKeys, maxCharacters)];
     }
     final symbolKey = _symbolKeys[symbol];
     switch (symbolKey) {
@@ -172,11 +172,13 @@ class Brain {
         _value = "0";
         break;
       case _BrainTypes.equals:
-        _operationStack.add(value);
-        final result = _computeOperationStack(_operationStack, _symbolKeys);
-        _value = result=="" ? value : result;
-        _operationStack = result=="" ? _operationStack : [];
-        _history += result=="" ? "" : ("=;" + value + "\n");
+        if (_operationStack.length>1) {
+          _operationStack.add(_value);
+          final result = _computeOperationStack(_operationStack, _symbolKeys);
+          _value = result=="" ? value : result;
+          _operationStack = result=="" ? _operationStack : [];
+          _history = result=="" ? "" : ("=;" + value + "\n");
+        }
         break;
       case _BrainTypes.remove:
         if (value.contains("e")) {
@@ -201,8 +203,6 @@ class Brain {
         break;
     }
 
-    final List<String> disabledSymbols = getDisabledSymbols(value, _operationStack, _symbolKeys, maxCharacters);
-    
-    return value;
+    return [value, getDisabledSymbols(value, _operationStack, _symbolKeys, maxCharacters)];
   }
 }

@@ -75,9 +75,13 @@ class _CalculatorState extends State<Calculator> {
             initialData: "0",
             stream: _stream,
             builder: (BuildContext c, AsyncSnapshot<String> snapshot) {
-              final number = widget.brain.compute(snapshot.data, 32);
+              final values = widget.brain.compute(snapshot.data, 32);
+              final number = values[0];
+              final disabledSymbols = values [1];
+
               print("snapshot.data " + snapshot.data);
               print("number " + number);
+              print("disabledSymbols ${disabledSymbols.toString()}");
               return Display(
                 width: size.width,
                 text: number,
