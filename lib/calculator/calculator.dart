@@ -57,8 +57,8 @@ class _CalculatorState extends State<Calculator> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // # Initialize calculator disabled symbols
-      final values = widget.brain.compute(widget.brain.value, maxCharacters);
-      final disabledSymbols = values [1];;
+      final values = widget.brain.compute(widget.brain.value, widget.maxCharacters);
+      final disabledSymbols = values [1];
       if (_sinkDisabledSymbols != null) {
         _sinkDisabledSymbols.add(disabledSymbols);
       }

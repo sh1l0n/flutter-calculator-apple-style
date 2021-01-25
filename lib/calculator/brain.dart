@@ -61,7 +61,7 @@ class Brain {
   }
 
   List<String> _operationStack = [];
-  
+
   String _history = "";
   String get history => _history; 
 
