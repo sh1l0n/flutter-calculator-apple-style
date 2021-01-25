@@ -42,6 +42,15 @@ class _CalculatorState extends State<CalculatorWidget> {
   Stream<String> get _stream => _calculatorController.stream;
   Sink<String> get _sink => _calculatorController.sink;
 
+  final List<int> padSize = [4, 5];
+  final List<List<String>> defaultOrderButtons = [
+    ["+/-", "%", "/", "<"],
+    ["7", "8", "9", "x"],
+    ["4", "5", "6", "-"],
+    ["1", "2", "3", "+"],
+    ["C", "0", ".", "="],
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -60,7 +69,7 @@ class _CalculatorState extends State<CalculatorWidget> {
       max(widget.style.display.size.width, widget.style.button.base.size.width),
       widget.style.display.size.height + widget.style.button.base.size.height*5,
     );
-
+    
     return Container(
       width: size.width,
       height: size.height,
@@ -73,11 +82,13 @@ class _CalculatorState extends State<CalculatorWidget> {
             stream: _stream,
             builder: (BuildContext c, AsyncSnapshot<String> snapshot) {
               return DisplayWidget(
-              text: snapshot.data,
-              style: widget.style.display,
-            );
+                text: snapshot.data,
+                style: widget.style.display,
+              );
           }),
           NumberPadWidget(
+            padSize: padSize,
+            defaultOrderButtons: defaultOrderButtons,
             buttonStyle: widget.style.button,
             onKeyPressed: _sink,
           ),

@@ -115,7 +115,6 @@ class _NumerPadButtonState extends State<NumberPadButtonWidget> {
   }
 }
 
-
 enum _NumberPadButtonWidgetState {
   NORMAL,
   HIGHLIGHTED,
