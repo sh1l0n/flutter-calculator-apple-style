@@ -1,8 +1,7 @@
 ## Issues
 
 ### DOING
-[] Display max length, round to 13 max characters
-[] Disable/Enable symbols in order to give feedback to the user
+
 
 ### TODO
 [] Highlight buttons when pressed (add animation because setState is not enought)
@@ -16,3 +15,5 @@
 [x] Add calculator skeleton
 [x] Connect number pad with display
 [x] Add calculator operations: +,-,*,/,%,C,.
+[x] Display max length, round to 16 max characters
+[x] Disable/Enable symbols in order to give feedback to the user
