@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
       base: ContainerStyleConfig(
         normalColor: Colors.black38, 
         highlightColor: Colors.lightBlueAccent,
-        disableColor: Colors.blueGrey,
+        disableColor: Colors.black12,
         size: Size(50, 50),
       ),
       text: TextStyleConfig(

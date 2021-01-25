@@ -71,7 +71,8 @@ class Brain {
     double numberDouble = double.tryParse(number);
     if (numberDouble == 0.0) {
       symbols += (number=="0" ? ["0", "C"] : []);
-      symbols += ["+", "-", "x", "<", "/", "%", "+/-"];
+      symbols += ["+", "-", "x", "/", "%", "+/-"];
+      symbols += (number.contains(".") ? []: ["<"]);
       if (operationStack.isEmpty) {
         symbols += ["="];
       } 
