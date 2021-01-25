@@ -81,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Calculator(
           brain: Brain(),
+          maxCharacters: 16,
           style: CalculatorStyle(
             backgroundColor: Colors.grey,
             display: displayStyle,

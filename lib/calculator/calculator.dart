@@ -27,19 +27,19 @@ class Calculator extends StatefulWidget {
   const Calculator({
     Key key, 
     @required this.brain,
+    @required this.maxCharacters,
     @required this.style
   }) : super(key: key);
 
   final CalculatorStyle style;
   final Brain brain;
+  final int maxCharacters;
 
   @override
   State<StatefulWidget> createState() => _CalculatorState();
 }
 
 class _CalculatorState extends State<Calculator> {
-
-  final int maxCharacters = 16;
 
   StreamController<String> _numberPadController;
   Stream<String> get _streamNumberPad => _numberPadController.stream;
@@ -90,7 +90,7 @@ class _CalculatorState extends State<Calculator> {
             initialData: "C",
             stream: _streamNumberPad,
             builder: (BuildContext c, AsyncSnapshot<String> snapshot) {
-              final values = widget.brain.compute(snapshot.data, maxCharacters);
+              final values = widget.brain.compute(snapshot.data, widget.maxCharacters);
               final number = values[0];
               final disabledSymbols = values [1];;
               if (_sinkDisabledSymbols != null) {
