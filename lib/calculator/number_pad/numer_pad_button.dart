@@ -48,25 +48,37 @@ class NumberPadButtonWidget extends StatefulWidget {
 
 
 class _NumerPadButtonState extends State<NumberPadButtonWidget> {
-
-  void handleTouch() {
-    if (widget.isEnabled) {
-      print("handleTouch " + widget.text);
-      // widget.onTap.add(widget.text);
-    }
-  }
+  bool _isTapDown = false;
 
   @override
   Widget build(BuildContext context) {
 
-    final Color color = widget.isEnabled ? widget.style.base.normalColor : widget.style.base.disableColor;
+    final Color enabledColor = _isTapDown ? widget.style.base.highlightColor : widget.style.base.normalColor; 
+    final Color color = widget.isEnabled ? enabledColor : widget.style.base.disableColor;
 
     return GestureDetector(
+      onTapDown: (TapDownDetails details) {
+        if (widget.isEnabled) {
+          setState(() {
+            _isTapDown = true;
+          });
+        }
+      },
       onTapUp: (TapUpDetails details) {
-        handleTouch();
+        if (widget.isEnabled) {
+          setState(() {
+            _isTapDown = false;
+          });
+          // widget.onTap.add(widget.text);
+        }
       },
       onTapCancel: () {
-        handleTouch();
+        if (widget.isEnabled) {
+          setState(() {
+            _isTapDown = false;
+          });
+        }
+        // widget.onTap.add(widget.text);
       },
       dragStartBehavior: DragStartBehavior.down,
       child: Container(
