@@ -68,8 +68,47 @@ class Brain {
 
 
 
-  static String _computeOperationStack(List<String> operationStack) {
-    if 
+  String _computeOperationStack(List<String> operationStack) {
+    if (operationStack.length<2) {
+      return "";
+    }
+
+    double result = 0;
+    int index = 0;
+    while (index < operationStack.length) {
+      final symbol = operationStack[index];
+
+      try {
+        final number = double.parse(symbol);
+        result += number;
+        index += 1;
+      } catch(Exception) {
+        final symbolKey = _symbolKeys[symbol];
+        try {
+          final nextSymbol = operationStack[index+1];
+          final nextSymbolDouble = double.parse(nextSymbol);
+          switch (symbolKey) {
+            case _BrainTypes.div: result /= nextSymbolDouble; break;
+            case _BrainTypes.sum: result += nextSymbolDouble; break;
+            case _BrainTypes.sub: result -= nextSymbolDouble; break;
+            case _BrainTypes.mul: result *= nextSymbolDouble; break;
+            default: break;
+          }
+          index += 2;
+        } catch (Exception) {
+          break;
+        }
+      }
+    }
+
+    final rString = result.toString();
+    final rSeparator = rString.contains("e") ? "e" : ".";
+    final rSplitted = rString.split(rSeparator);
+    if (rSplitted.length==2 && int.parse(rSplitted[1])==0) {
+      return result.toInt().toString();
+    } else {
+      return result.toString();
+    }
   }
 
   static String _removeLast(String number) {
@@ -117,9 +156,10 @@ class Brain {
         break;
       case _BrainTypes.equals:
         _operationStack.add(value);
-        _value = _computeOperationStack(_operationStack);
-        _operationStack = [];
-        _history += "=;" + value + "\n";
+        final result = _computeOperationStack(_operationStack);
+        _value = result=="" ? value : result;
+        _operationStack = result=="" ? _operationStack : [];
+        _history += result=="" ? "" : ("=;" + value + "\n");
         break;
       case _BrainTypes.remove:
         if (value.contains("e")) {
