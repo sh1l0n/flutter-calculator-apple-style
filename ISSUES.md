@@ -1,10 +1,10 @@
 ## Issues
 
 ### DOING
-
+[] Highlight buttons when pressed (add animation because setState is not enought)
+[] Stylish as Swift-Calculator
 
 ### TODO
-[] Highlight buttons when pressed (add animation because setState is not enought)
 [] Do calculator draggable in the view
 
 ### DONE
