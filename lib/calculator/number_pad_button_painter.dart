@@ -33,7 +33,6 @@ class NumberPadButtonPainter extends CustomPainter {
     if (size == Size.zero) {
       return;
     }
-
     final frame = Rect.fromLTWH(0, 0, size.width, size.height);
     final frameRounded = RRect.fromRectAndRadius(frame, Radius.circular(style.cornerRadius));
     canvas.drawRRect(frameRounded, _fillPaint);

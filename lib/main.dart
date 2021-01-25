@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calc/calculator/number_pad.dart';
 
+import 'calculator/numer_pad_button.dart';
 import 'common/widget_style_config.dart';
 
 void main() {
@@ -31,18 +32,21 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    final TextStyleConfig textStyle = TextStyleConfig(
+    final textStyle = TextStyleConfig(
       size: 18,
       color: Color(0xffffffff),
       family: "Arial-MT",
       weight: FontWeight.normal,
       package: "",
     );
-    final ContainerStyleConfig buttonStyle = ContainerStyleConfig(
+    final buttonStyle = NumerPadButtonStyle(
       normalColor: Color(0xffff00ff), 
       highlightColor: Color(0x0000ffff),
       disableColor: Color(0x00ff00ff),
-      size: Size(50, 50)
+      size: Size(50, 50),
+      cornerRadius: 10, 
+      strokeWidth: 3, 
+      strokeColor: Color(0xffffffff)
     );
     
     return Scaffold(
