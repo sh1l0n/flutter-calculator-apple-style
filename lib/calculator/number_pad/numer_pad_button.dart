@@ -98,7 +98,7 @@ class _NumerPadButtonState extends State<NumberPadButton> {
     );
   }
 
-  void _handleTap(bool isTapDown) {
+  void _handleTap(final bool isTapDown) {
     if (widget.isEnabled) {
       if (_sink != null) {
         _sink.add(isTapDown ? _NumberPadButtonWidgetState.HIGHLIGHTED : _NumberPadButtonWidgetState.NORMAL);

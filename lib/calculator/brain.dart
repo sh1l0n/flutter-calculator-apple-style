@@ -27,7 +27,7 @@ class Brain {
     ["C", "0", ".", "="],
   ];
 
-  final _symbolKeys = {
+  final Map<String, _BrainTypes> _symbolKeys = {
     "C": _BrainTypes.clear,
     "+/-": _BrainTypes.sign,
     "%": _BrainTypes.perc,
@@ -66,9 +66,26 @@ class Brain {
   String _history = "";
   // String get history => _history; 
 
+  static List<String> getDisabledSymbols(final String number, final List<String> operationStack,  final Map<String, _BrainTypes> symbolKeys, final int maxCharacters) {
+    List<String> symbols = [];
+    double numberDouble = double.tryParse(number);
+    if (numberDouble == 0.0) {
+      symbols += (number=="0" ? ["0", "C"] : []);
+      symbols += ["+", "-", "x", "<", "/", "%", "+/-"];
+      if (operationStack.isEmpty) {
+        symbols += ["="];
+      } 
+    }
+    if (number.contains(".") || number.contains("e") || number.length>maxCharacters-2) {
+      symbols += ["."];
+    } 
+    if (number.length>=maxCharacters-1) {
+      symbols += ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "+/-"]
+    }
+    return symbols;
+  }
 
-
-  String _computeOperationStack(List<String> operationStack) {
+  static String _computeOperationStack(final List<String> operationStack, final Map<String, _BrainTypes> symbolKeys) {
     if (operationStack.length<2) {
       return "";
     }
@@ -83,7 +100,7 @@ class Brain {
         result += number;
         index += 1;
       } catch(Exception) {
-        final symbolKey = _symbolKeys[symbol];
+        final symbolKey = symbolKeys[symbol];
         try {
           final nextSymbol = operationStack[index+1];
           final nextSymbolDouble = double.parse(nextSymbol);
@@ -111,7 +128,7 @@ class Brain {
     }
   }
 
-  static String _removeLast(String number) {
+  static String _removeLast(final String number) {
     String newValue = number;
     if (number.length>0) {
       newValue = newValue.substring(0, newValue.length - 1);
@@ -127,7 +144,7 @@ class Brain {
   }
 
 
-  String compute(String symbol, int maxLength) {
+  String compute(final String symbol, final int maxCharacters) {
     
     if (!_symbolKeys.containsKey(symbol)) {
       return value;
@@ -156,7 +173,7 @@ class Brain {
         break;
       case _BrainTypes.equals:
         _operationStack.add(value);
-        final result = _computeOperationStack(_operationStack);
+        final result = _computeOperationStack(_operationStack, _symbolKeys);
         _value = result=="" ? value : result;
         _operationStack = result=="" ? _operationStack : [];
         _history += result=="" ? "" : ("=;" + value + "\n");
@@ -183,6 +200,8 @@ class Brain {
         }
         break;
     }
+
+    final List<String> disabledSymbols = getDisabledSymbols(value, _operationStack, _symbolKeys, maxCharacters);
     
     return value;
   }
