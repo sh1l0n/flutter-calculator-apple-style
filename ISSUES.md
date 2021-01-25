@@ -8,9 +8,9 @@
 [] Add calculator operations: +,-,*,/,%,C,.
 
 ### DONE
-[X] Add basic number pad view
-[X] Number pad view needs to detect gestures
-[X] Center button text
-[X] Add display
+[x] Add basic number pad view
+[x] Number pad view needs to detect gestures
+[x] Center button text
+[x] Add display
 [x] Add calculator skeleton
 [x] Connect number pad with display
