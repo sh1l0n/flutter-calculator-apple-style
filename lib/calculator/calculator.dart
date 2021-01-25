@@ -8,48 +8,42 @@ import 'dart:math';
 
 import 'package:flutter/widgets.dart';
 
-import 'display_widget.dart';
+import 'brain.dart';
+import 'display.dart';
 import 'number_pad/number_pad.dart';
 import 'number_pad/numer_pad_button.dart';
 
-class CalculatorWidgetStyle {
-  const CalculatorWidgetStyle({
+class CalculatorStyle {
+  const CalculatorStyle({
     @required this.backgroundColor,
     @required this.display, 
     @required this.button,
   });
 
-  final DisplayWidgetStyle display;
+  final DisplayStyle display;
   final NumerPadButtonStyle button;
   final Color backgroundColor;
 }
 
-class CalculatorWidget extends StatefulWidget {
-  const CalculatorWidget({
+class Calculator extends StatefulWidget {
+  const Calculator({
     Key key, 
+    @required this.brain,
     @required this.style
   }) : super(key: key);
 
-  final CalculatorWidgetStyle style;
+  final CalculatorStyle style;
+  final Brain brain;
 
   @override
   State<StatefulWidget> createState() => _CalculatorState();
 }
 
-class _CalculatorState extends State<CalculatorWidget> {
+class _CalculatorState extends State<Calculator> {
 
   StreamController<String> _calculatorController;
   Stream<String> get _stream => _calculatorController.stream;
   Sink<String> get _sink => _calculatorController.sink;
-
-  final List<int> padSize = [4, 5];
-  final List<List<String>> defaultOrderButtons = [
-    ["+/-", "%", "/", "<"],
-    ["7", "8", "9", "x"],
-    ["4", "5", "6", "-"],
-    ["1", "2", "3", "+"],
-    ["C", "0", ".", "="],
-  ];
 
   @override
   void initState() {
@@ -66,8 +60,8 @@ class _CalculatorState extends State<CalculatorWidget> {
   @override
   Widget build(BuildContext context) {
     final size = Size(
-      widget.style.button.base.size.width * padSize[0],
-      widget.style.display.height + widget.style.button.base.size.height*padSize[1],
+      widget.style.button.base.size.width * widget.brain.padSize[0],
+      widget.style.display.height + widget.style.button.base.size.height*widget.brain.padSize[1],
     );
     
     return Container(
@@ -81,15 +75,15 @@ class _CalculatorState extends State<CalculatorWidget> {
             initialData: "0",
             stream: _stream,
             builder: (BuildContext c, AsyncSnapshot<String> snapshot) {
-              return DisplayWidget(
+              return Display(
                 width: size.width,
                 text: snapshot.data,
                 style: widget.style.display,
               );
           }),
-          NumberPadWidget(
-            padSize: padSize,
-            defaultOrderButtons: defaultOrderButtons,
+          NumberPad(
+            padSize: widget.brain.padSize,
+            defaultOrderButtons: widget.brain.defaultOrderButtons,
             buttonStyle: widget.style.button,
             onKeyPressed: _sink,
           ),

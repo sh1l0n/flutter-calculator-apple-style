@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import '../common/widget_style_config.dart';
 import 'number_pad/number_pad_button_painter.dart';
 
-class DisplayWidgetStyle {
-  const DisplayWidgetStyle({
+class DisplayStyle {
+  const DisplayStyle({
     @required this.height,
     @required this.color, 
     @required this.horizontalMargin,
@@ -28,8 +28,8 @@ class DisplayWidgetStyle {
   final Color strokeColor;
 }
 
-class DisplayWidget extends StatelessWidget {
-  const DisplayWidget({
+class Display extends StatelessWidget {
+  const Display({
     Key key, 
     @required this.width,
     @required this.text,
@@ -39,7 +39,7 @@ class DisplayWidget extends StatelessWidget {
 
   final String text;
   final double width;
-  final DisplayWidgetStyle style;
+  final DisplayStyle style;
 
   Widget build(BuildContext context) {
     return Container(
@@ -83,5 +83,4 @@ class DisplayWidget extends StatelessWidget {
       ),
     );
   }
-
 }

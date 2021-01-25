@@ -1,10 +1,11 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_calc/calculator/calculator_widget.dart';
-import 'package:flutter_calc/calculator/display_widget.dart';
-import 'calculator/number_pad/numer_pad_button.dart';
 
+import 'calculator/brain.dart';
+import 'calculator/calculator.dart';
+import 'calculator/display.dart';
+import 'calculator/number_pad/numer_pad_button.dart';
 import 'common/widget_style_config.dart';
 
 void main() {
@@ -54,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
       strokeColor: Colors.black45,
     );
 
-    final displayStyle = DisplayWidgetStyle(
+    final displayStyle = DisplayStyle(
       color: Colors.black12,
       cornerRadius: 0,
       horizontalMargin: 8,
@@ -75,8 +76,9 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: CalculatorWidget(
-          style: CalculatorWidgetStyle(
+        child: Calculator(
+          brain: Brain(),
+          style: CalculatorStyle(
             backgroundColor: Colors.grey,
             display: displayStyle,
             button: buttonStyle,
