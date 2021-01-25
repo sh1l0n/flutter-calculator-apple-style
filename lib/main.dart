@@ -37,10 +37,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
 
-  NumerPadButtonStyle _generateButtonStyle(final Size buttonSize, final ContainerStyleConfig style) {
+  NumerPadButtonStyle _generateButtonStyle(final Size buttonSize, final ContainerStyleConfig style, final Color textColor) {
     final textStyle =  TextStyleConfig(
         size: 16,
-        color: Color(0xff000000),
+        color: textColor,
         family: "Lucia Console",
         weight: FontWeight.normal,
         package: "",
@@ -75,9 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
       disableColor: Color(0xffcdcccb),
       size: buttonSize,
     );
-    final style1 = _generateButtonStyle(buttonSize, _style1);
-    final style2 = _generateButtonStyle(buttonSize, _style2);
-    final style3 = _generateButtonStyle(buttonSize, _style3);
+    final style1 = _generateButtonStyle(buttonSize, _style1, Color(0xff000000));
+    final style2 = _generateButtonStyle(buttonSize, _style2, Color(0xffffffff));
+    final style3 = _generateButtonStyle(buttonSize, _style3, Color(0xff000000));
 
      final Map<String, NumerPadButtonStyle> buttonStyles = {
       "C": style1,
