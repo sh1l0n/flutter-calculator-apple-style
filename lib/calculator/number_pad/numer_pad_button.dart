@@ -12,22 +12,15 @@ import 'package:flutter_calc/common/widget_style_config.dart';
 
 import 'number_pad_button_painter.dart';
 
-class NumerPadButtonStyle extends ContainerStyleConfig {
-  NumerPadButtonStyle({
-    @required Color normalColor, 
-    @required Color highlightColor, 
-    @required Color disableColor,
-    @required Size size,
-    this.cornerRadius, 
-    this.strokeWidth, 
-    this.strokeColor
-  }): super(
-    normalColor: normalColor,
-    highlightColor: highlightColor,
-    disableColor: disableColor,
-    size: size
-  );
+class NumerPadButtonStyle {
+  const NumerPadButtonStyle({
+    @required this.style,
+    @required this.cornerRadius, 
+    @required this.strokeWidth, 
+    @required this.strokeColor
+  });
 
+  final ContainerStyleConfig style;
   final double cornerRadius; 
   final double strokeWidth;
   final Color strokeColor;
@@ -66,7 +59,7 @@ class _NumerPadButtonState extends State<NumberPadButtonWidget> {
   @override
   Widget build(BuildContext context) {
 
-    final Color color = widget.isEnabled ? widget.style.normalColor : widget.style.disableColor;
+    final Color color = widget.isEnabled ? widget.style.style.normalColor : widget.style.style.disableColor;
 
     return GestureDetector(
       onTapUp: (TapUpDetails details) {
@@ -77,13 +70,13 @@ class _NumerPadButtonState extends State<NumberPadButtonWidget> {
       },
       dragStartBehavior: DragStartBehavior.down,
       child: Container(
-        width: widget.style.size.width,
-        height: widget.style.size.height,
+        width: widget.style.style.size.width,
+        height: widget.style.style.size.height,
         color: color,
         child: Stack(
           children: [
             CustomPaint(
-              size: widget.style.size,
+              size: widget.style.style.size,
               painter: NumberPadButtonPainter(
                 style: PainterStyleConfig(
                   cornerRadius: widget.style.cornerRadius,
@@ -95,8 +88,8 @@ class _NumerPadButtonState extends State<NumberPadButtonWidget> {
             ),
             Center(
               child: Container(
-                width: widget.style.size.width,
-                height: widget.style.size.height,
+                width: widget.style.style.size.width,
+                height: widget.style.style.size.height,
                 child: Center(
                   child: Text(
                     widget.text,

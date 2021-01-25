@@ -7,7 +7,7 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' show CustomPainter;
 
-import '../common/widget_style_config.dart';
+import '../../common/widget_style_config.dart';
 
 
 class NumberPadButtonPainter extends CustomPainter {

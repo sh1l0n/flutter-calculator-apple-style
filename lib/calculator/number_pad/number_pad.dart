@@ -5,7 +5,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_calc/calculator/numer_pad_button.dart';
+import 'package:flutter_calc/calculator/number_pad/numer_pad_button.dart';
 import 'package:flutter_calc/common/widget_style_config.dart';
 
 class NumberPadWidget extends StatefulWidget {
@@ -17,7 +17,7 @@ class NumberPadWidget extends StatefulWidget {
   : super(key: key);
 
   final Sink<RawKeyEvent> onKeyPressed;
-  final ContainerStyleConfig buttonStyle;
+  final NumerPadButtonStyle buttonStyle;
   final TextStyleConfig textStyle;
 
   @override
@@ -87,8 +87,8 @@ class _NumberPadWState extends State<NumberPadWidget> {
       child: Container(
         // margin: EdgeInsets.only(top: 230),
         margin: EdgeInsets.all(50),
-        width: widget.buttonStyle.size.width * padSize[0],
-        height: widget.buttonStyle.size.height * padSize[1],
+        width: widget.buttonStyle.style.size.width * padSize[0],
+        height: widget.buttonStyle.style.size.height * padSize[1],
         color: Colors.red,
         child: GridView.count(
           crossAxisCount: 4, // 4 columns
