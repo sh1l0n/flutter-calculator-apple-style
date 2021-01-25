@@ -39,7 +39,7 @@ class Calculator extends StatefulWidget {
 
 class _CalculatorState extends State<Calculator> {
 
-  final int maxCharacters = 32;
+  final int maxCharacters = 16;
 
   StreamController<String> _numberPadController;
   Stream<String> get _streamNumberPad => _numberPadController.stream;

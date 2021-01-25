@@ -17,9 +17,7 @@ enum _BrainTypes {
   remove,
 }
 
-
 class Brain {
-
   List<int> get padSize => [4, 5];
   List<List<String>> get defaultOrderButtons => [
     ["+/-", "%", "/", "<"],
@@ -63,10 +61,9 @@ class Brain {
   }
 
   List<String> _operationStack = [];
-  // List<String> get operationStack => _operationStack;
-
+  
   String _history = "";
-  // String get history => _history; 
+  String get history => _history; 
 
   static List<String> getDisabledSymbols(final String number, final List<String> operationStack,  final Map<String, _BrainTypes> symbolKeys, final int maxCharacters) {
     List<String> symbols = [];
