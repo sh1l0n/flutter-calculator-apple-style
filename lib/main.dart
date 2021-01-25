@@ -3,6 +3,8 @@
 // Copyright Author 2021 All rights reserved.
 //
 
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -146,7 +148,10 @@ class _MyHomePageState extends State<MyHomePage> {
     if (!kIsWeb) {
       final width = (size.width~/brain.padSize[0]).toDouble();
       final height = (size.height~/(brain.padSize[1]*1.8)).toDouble();
-      buttonSize = Size(width, height);  
+      final bMax = max(width, height);
+      buttonSize = Size(bMax, bMax);  
+      //#TODO: Grid creates square elements, normally we need height>width in mobile devices if we want full screen
+      // buttonSize = Size(width, height)
       displaySize = height*0.8;
       maxCharacters = 22;
     } else {

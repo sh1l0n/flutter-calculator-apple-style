@@ -87,6 +87,10 @@ class _NumerPadButtonState extends State<NumberPadButton> {
         _handleTap(false);
       },
       dragStartBehavior: DragStartBehavior.down,
+      // child: Container(
+      //   width: widget.style.base.size.width,
+      //   width: widget.style.base.size.width,
+      // )
       child: StreamBuilder(
         initialData: _NumberPadButtonWidgetState.NORMAL,
         stream: _stream,
@@ -150,6 +154,7 @@ class _NumberPadButtonWidget extends StatelessWidget {
     return Container(
       width: style.base.size.width,
       height: style.base.size.height,
+      color: Color(0xffff0000),
       child: Stack(
         children: [
           CustomPaint(

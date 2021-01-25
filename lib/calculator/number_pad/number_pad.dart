@@ -64,6 +64,8 @@ class _NumberPadState extends State<NumberPad> {
         width: width,
         height: height,
         child: GridView.count(
+          mainAxisSpacing: 0,
+          crossAxisSpacing: 0,
           crossAxisCount: 4, // 4 columns
           children: buttons,
         ),

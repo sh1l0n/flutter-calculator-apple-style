@@ -1,10 +1,10 @@
 ## Issues
 
 ### DOING
-[] Running on Android
+[X] Running on Android
+[X] Do calculator fit screen in mobile devices
 
 ### TODO
-[] Do calculator fit screen in mobile devices
 [] Highlight buttons when pressed (add animation because setState is not enought)
 [] Align display text at right
 [] Do calculator draggable in the web
